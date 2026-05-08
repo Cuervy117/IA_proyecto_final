@@ -1,0 +1,24 @@
+# Archivos auxiliares de LaTeX
+*.aux
+*.log
+*.out
+*.toc
+*.synctex.gz
+*.fdb_latexmk
+*.fls
+*.nav
+*.snm
+*.vrb
+*.bbl
+*.blg
+
+# Directorios
+out/
+build/
+
+# Especificaciones del editor y SO
+.textstudio/
+.DS_Store
+Thumbs.db
+*.swp
+*~

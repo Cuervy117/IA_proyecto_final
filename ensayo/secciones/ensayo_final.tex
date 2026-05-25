@@ -1,0 +1,275 @@
+\section{Introducción}
+
+La Inteligencia Artificial (IA) es una rama de las ciencias computacionales que estudia y construye modelos capaces de realizar tareas asociadas con el comportamiento inteligente. Entre estas tareas se encuentran la percepción, el razonamiento, el aprendizaje, la toma de decisiones, la comprensión del lenguaje natural y la actuación autónoma en un entorno. A diferencia de un programa tradicional, que solo ejecuta instrucciones previamente definidas, un sistema de IA busca adaptarse a datos, objetivos, restricciones e incertidumbre.
+
+El propósito de este trabajo es analizar diferentes modelos de Inteligencia Artificial desde una perspectiva teórica y aplicada. Para cada modelo se presenta su concepto, funcionamiento general, ejemplo de aplicación, ventajas, limitaciones y contextos donde resulta útil. La intención no es estudiar los modelos como temas aislados, sino comprender cómo se relacionan dentro de un sistema inteligente completo.
+
+Como base conceptual se retoma el enfoque de Russell y Norvig, quienes explican la IA a partir de la idea de agentes racionales. Desde esta perspectiva, un sistema inteligente no solo debe producir una salida, sino elegir acciones adecuadas de acuerdo con sus percepciones, conocimiento, objetivos y medida de desempeño \cite{russell2012}. Este enfoque permite comparar modelos simples, como agentes reflejos, con modelos más avanzados, como agentes basados en metas, utilidad, aprendizaje automático y razonamiento probabilístico.
+
+% =========================================================
+% DESARROLLO
+% =========================================================
+\section{Desarrollo}
+
+\subsection{Panorama general de los modelos de IA}
+
+Los modelos de IA pueden organizarse según la forma en que representan el conocimiento, aprenden de los datos o toman decisiones. Algunos modelos se basan en reglas explícitas; otros aprenden patrones a partir de ejemplos; otros razonan con probabilidades; y otros planean secuencias de acciones para alcanzar una meta.
+
+\begin{table}[h!]
+\centering
+\small
+\renewcommand{\arraystretch}{1.25}
+\begin{tabularx}{\textwidth}{L{3.4cm} Y Y}
+\toprule
+\textbf{Enfoque} & \textbf{Idea principal} & \textbf{Ejemplos de modelos} \\
+\midrule
+Simbólico & Representa conocimiento mediante reglas, símbolos y relaciones lógicas. & Sistemas expertos, reglas si--entonces, lógica proposicional. \\
+Conectivista & Aprende patrones a partir de datos mediante estructuras inspiradas en redes neuronales. & Perceptrón, redes neuronales profundas, CNN. \\
+Probabilístico & Modela incertidumbre mediante probabilidades y actualización de creencias. & Naive Bayes, redes bayesianas, modelos ocultos de Markov. \\
+Basado en búsqueda & Explora estados posibles para encontrar una solución o camino. & BFS, DFS, costo uniforme, A*. \\
+Basado en aprendizaje & Mejora su desempeño a partir de experiencia o datos. & Aprendizaje supervisado, no supervisado y por refuerzo. \\
+\bottomrule
+\end{tabularx}
+\caption{Panorama general de enfoques de Inteligencia Artificial.}
+\label{tab:enfoques}
+\end{table}
+
+Esta clasificación permite observar que la IA moderna no depende de una sola técnica. En la práctica, muchos sistemas combinan varios enfoques: un vehículo autónomo puede usar visión por computadora para percibir, modelos probabilísticos para manejar incertidumbre, búsqueda para planear rutas y aprendizaje automático para mejorar su desempeño.
+
+\subsection{Agentes inteligentes y ambientes}
+
+Un agente inteligente es una entidad capaz de percibir su entorno y actuar sobre él para alcanzar uno o varios objetivos. Su estructura básica incluye sensores, una función de agente y actuadores. Los sensores captan información del ambiente; la función de agente interpreta las percepciones y decide qué acción realizar; los actuadores ejecutan la respuesta.
+
+Los agentes pueden ser humanos, robóticos o de software. Un agente humano percibe mediante sentidos naturales y actúa con su cuerpo. Un agente robótico utiliza cámaras, micrófonos, sensores de proximidad o LIDAR, y actúa mediante motores o brazos mecánicos. Un agente de software recibe información digital y responde mediante mensajes, recomendaciones, búsquedas o modificaciones en archivos y sistemas.
+
+\subsubsection{Ejemplo aplicado}
+
+Un robot de almacén es un ejemplo claro de agente inteligente. Percibe obstáculos, pasillos y estantes mediante sensores; decide una ruta mediante su función de agente; y se desplaza mediante motores. Su medida de desempeño puede incluir entregar productos correctamente, reducir el tiempo de traslado, evitar choques y disminuir el consumo de energía.
+
+\subsubsection{Ventajas y limitaciones}
+
+La principal ventaja del enfoque de agentes es que organiza la IA en términos de percepción, decisión y acción. Esto facilita definir qué información recibe el sistema, qué acciones puede ejecutar y cómo se evalúa su desempeño.
+
+Su limitación es que el diseño depende mucho del tipo de ambiente. Un agente que funciona bien en un ambiente estático y completamente observable puede fallar en un ambiente dinámico, parcial o incierto. Por ejemplo, no es igual resolver un crucigrama que conducir un automóvil en una avenida con peatones, semáforos, ruido y otros conductores.
+
+\subsection{Agentes de reflejo simple}
+
+Los agentes de reflejo simple toman decisiones mediante reglas de condición--acción. Su comportamiento puede expresarse de la siguiente forma: si ocurre cierta condición, entonces se realiza una acción. Estos agentes no almacenan una historia compleja de percepciones ni planean acciones futuras; reaccionan con base en la percepción inmediata.
+
+\subsubsection{Ejemplo aplicado}
+
+Un termostato es un ejemplo clásico. Si la temperatura supera un límite, activa el aire acondicionado; si baja de cierto punto, enciende la calefacción. Otro ejemplo es una lámpara con sensor de movimiento: si detecta presencia, se enciende; si no detecta movimiento, permanece apagada.
+
+\subsubsection{Análisis}
+
+Sus ventajas principales son la rapidez, la simplicidad y el bajo costo computacional. Son fáciles de implementar y adecuados para tareas repetitivas con reglas claras. Sin embargo, tienen limitaciones importantes: no aprenden de experiencias pasadas, no planean y pueden fallar si la percepción actual es incompleta o si el ambiente cambia.
+
+Este tipo de agente es útil en automatización doméstica, sensores simples, alarmas, sistemas embebidos y control básico de dispositivos.
+
+\subsection{Agentes basados en metas}
+
+Los agentes basados en metas no solo reaccionan a estímulos; actúan para alcanzar un objetivo definido. Para ello consideran varias acciones posibles y seleccionan una secuencia que los acerque al estado deseado. Este tipo de agente es más flexible que uno de reflejo simple porque puede comparar alternativas.
+
+\subsubsection{Ejemplo aplicado}
+
+Un sistema GPS representa un agente basado en metas. Su estado inicial es la ubicación actual del usuario; su meta es llegar al destino; sus acciones son tomar calles o rutas disponibles; y su costo puede medirse en distancia, tiempo o tráfico. El GPS no solo responde al entorno, sino que planea una ruta.
+
+\subsubsection{Elementos principales}
+
+Para formular un problema de búsqueda se consideran los siguientes elementos:
+
+\begin{enumerate}
+    \item \textbf{Estado inicial:} punto de partida del agente.
+    \item \textbf{Acciones posibles:} movimientos o decisiones disponibles.
+    \item \textbf{Modelo de transición:} resultado de aplicar una acción.
+    \item \textbf{Prueba de meta:} criterio para saber si el objetivo fue alcanzado.
+    \item \textbf{Costo del camino:} medida para comparar soluciones.
+\end{enumerate}
+
+Los agentes basados en metas son útiles en navegación, planificación de tareas, robótica móvil, videojuegos, logística y solución de rompecabezas. Su principal ventaja es que pueden planear antes de actuar. Su principal limitación es que el número de estados puede crecer demasiado, lo que provoca alto consumo de tiempo y memoria.
+
+\subsection{Representación de problemas y búsqueda de soluciones}
+
+La representación de problemas consiste en traducir una situación real a una estructura formal que pueda ser procesada por un algoritmo. Una de las representaciones más importantes es el \textbf{espacio de estados}, que contiene todas las configuraciones posibles de un problema y las transiciones entre ellas.
+
+\subsubsection{Ejemplo aplicado}
+
+En la dinámica del mensajero perdido, un mensajero debe entregar un paquete desde una oficina central hasta una casa. Existen rutas posibles, obstáculos, calles cerradas y caminos con diferentes costos. La solución consiste en encontrar una ruta adecuada desde el estado inicial hasta el estado meta.
+
+En este ejemplo, el estado inicial es la ubicación del mensajero; las acciones pueden ser moverse a la izquierda, derecha, arriba o abajo; la meta es llegar a la casa; el costo puede medirse por número de movimientos, distancia o tiempo estimado; y las restricciones pueden incluir calles bloqueadas, tráfico pesado o semáforos.
+
+\subsubsection{Métodos de búsqueda}
+
+Entre los métodos de búsqueda más comunes se encuentran:
+
+\begin{itemize}
+    \item \textbf{Búsqueda en amplitud:} explora primero los nodos más cercanos al estado inicial.
+    \item \textbf{Búsqueda en profundidad:} avanza por una rama hasta el fondo antes de retroceder.
+    \item \textbf{Costo uniforme:} expande el camino con menor costo acumulado.
+    \item \textbf{Búsqueda A*:} combina el costo acumulado con una estimación heurística hacia la meta.
+\end{itemize}
+
+La ventaja de estos métodos es que permiten resolver problemas de manera sistemática. Su limitación aparece cuando el espacio de estados es muy grande, porque se puede producir una explosión combinatoria. Por ello, en problemas reales se usan heurísticas, restricciones y estrategias de optimización.
+
+\subsection{Sistemas expertos e IA simbólica}
+
+La IA simbólica representa conocimiento mediante símbolos, reglas y relaciones lógicas. Los sistemas expertos son una aplicación de este enfoque: utilizan una base de conocimiento y un motor de inferencia para resolver problemas en un dominio especializado.
+
+\subsubsection{Ejemplo aplicado}
+
+Un sistema experto médico puede usar reglas como: si el paciente presenta fiebre, dolor de garganta y ciertos resultados de laboratorio, entonces existe una probabilidad de infección. Aunque los sistemas modernos suelen integrar datos y aprendizaje automático, la lógica basada en reglas sigue siendo útil cuando se requiere explicación.
+
+\subsubsection{Análisis}
+
+La principal ventaja de los sistemas expertos es su interpretabilidad. Como trabajan con reglas explícitas, pueden justificar sus conclusiones y ser auditados. Esto resulta valioso en medicina, industria, finanzas y derecho.
+
+Su principal limitación es la rigidez. Si el dominio cambia o existen muchas excepciones, la base de conocimiento debe actualizarse constantemente. Además, construir reglas de calidad requiere especialistas humanos.
+
+\subsection{Modelos probabilísticos y razonamiento bajo incertidumbre}
+
+Los modelos probabilísticos permiten razonar cuando la información es incompleta o incierta. En lugar de afirmar que una hipótesis es totalmente verdadera o falsa, asignan probabilidades y actualizan sus creencias cuando reciben nueva evidencia. Este enfoque es fundamental en ambientes estocásticos, donde el resultado de una acción no puede predecirse con total seguridad.
+
+\subsubsection{Ejemplo aplicado}
+
+En diagnóstico médico, un síntoma no garantiza una enfermedad específica. La fiebre puede estar relacionada con múltiples causas. Un modelo probabilístico combina síntomas, antecedentes y estudios clínicos para estimar qué hipótesis es más probable.
+
+Los modelos bayesianos son representativos de este enfoque, ya que actualizan la probabilidad de una hipótesis cuando se obtiene nueva evidencia. Russell y Norvig consideran el razonamiento probabilístico una parte esencial de la IA cuando los agentes deben decidir bajo incertidumbre \cite{russell2012}.
+
+\subsubsection{Análisis}
+
+Su ventaja principal es que permiten tomar decisiones razonables con información incompleta. Se aplican en diagnóstico médico, sensores inciertos, reconocimiento de voz, filtros de spam, predicción de riesgos y sistemas de recomendación.
+
+Su limitación es que dependen de probabilidades confiables y de supuestos adecuados. Si el modelo ignora variables importantes o las probabilidades están mal estimadas, las conclusiones pueden ser incorrectas.
+
+\subsection{Aprendizaje automático supervisado y no supervisado}
+
+El aprendizaje automático permite que un sistema mejore su desempeño a partir de datos. En el aprendizaje supervisado, el modelo aprende con ejemplos etiquetados; en el aprendizaje no supervisado, busca patrones en datos sin etiquetas.
+
+\subsubsection{Ejemplos aplicados}
+
+Un ejemplo de aprendizaje supervisado es la clasificación de correos como spam o no spam. El sistema aprende a partir de mensajes previamente etiquetados. Un ejemplo de aprendizaje no supervisado es la segmentación de clientes, donde el modelo agrupa usuarios con comportamientos similares sin que se le indiquen categorías previas.
+
+También existe el aprendizaje por refuerzo, en el que un agente aprende mediante recompensas y castigos al interactuar con un entorno. Este último se estudia con más detalle en una sección posterior.
+
+\subsubsection{Análisis}
+
+La ventaja principal del aprendizaje automático es que permite resolver problemas donde sería difícil escribir reglas manuales. Puede detectar patrones en grandes volúmenes de información y mejorar con nuevos datos.
+
+Su limitación es que depende de la calidad, cantidad y representatividad de los datos. Si los datos tienen sesgos, errores o son insuficientes, el modelo puede producir resultados incorrectos o injustos.
+
+\subsection{Redes neuronales artificiales y aprendizaje profundo}
+
+Las redes neuronales artificiales son modelos inspirados en la organización del sistema nervioso. Están formadas por unidades llamadas neuronas artificiales, conectadas mediante pesos que se ajustan durante el entrenamiento. Una red suele tener una capa de entrada, una o más capas ocultas y una capa de salida.
+
+El aprendizaje profundo utiliza redes con múltiples capas capaces de aprender representaciones complejas. Este enfoque ha impulsado avances importantes en visión por computadora, procesamiento de lenguaje natural, reconocimiento de voz y generación de contenido.
+
+\subsubsection{Ejemplo aplicado}
+
+Una red neuronal convolucional puede analizar imágenes médicas para detectar anomalías. Las primeras capas pueden identificar bordes y texturas; las capas intermedias reconocen formas; y las capas finales clasifican la imagen o señalan regiones relevantes.
+
+\subsubsection{Análisis}
+
+Las redes neuronales pueden aprender patrones complejos y no lineales. Funcionan con imágenes, texto, audio y video, por lo que son útiles en reconocimiento facial, diagnóstico médico, traducción automática, vehículos autónomos, asistentes virtuales y sistemas de recomendación.
+
+Sus limitaciones son el alto costo computacional, la necesidad de grandes cantidades de datos y la dificultad para interpretar sus decisiones. Esta falta de interpretabilidad es un problema importante cuando se aplican en áreas sensibles como salud, seguridad o finanzas.
+
+\subsection{Aprendizaje por refuerzo}
+
+El aprendizaje por refuerzo estudia agentes que aprenden a partir de la interacción con el ambiente. El agente observa un estado, ejecuta una acción, recibe una recompensa o castigo y ajusta su comportamiento para maximizar la recompensa acumulada.
+
+\subsubsection{Ejemplo aplicado}
+
+Un agente que aprende a jugar un videojuego puede comenzar con acciones aleatorias. Con el tiempo, recibe recompensas al avanzar o ganar puntos, y castigos al perder. A partir de esta experiencia aprende una política de acción más efectiva.
+
+\subsubsection{Análisis}
+
+La ventaja de este modelo es que permite aprender estrategias en problemas secuenciales, donde una decisión actual afecta estados futuros. Por eso se aplica en videojuegos, robótica, control industrial, simuladores, navegación autónoma y optimización de recursos.
+
+Su limitación es que puede requerir muchas interacciones, simulaciones y tiempo de entrenamiento. Además, si la función de recompensa está mal diseñada, el agente puede aprender comportamientos no deseados.
+
+\subsection{Visión por computadora}
+
+La visión por computadora permite que una máquina perciba, interprete y comprenda información visual. Su objetivo es transformar imágenes, videos o nubes de puntos en información estructurada útil para tomar decisiones.
+
+\subsubsection{Problemas fundamentales}
+
+Entre sus problemas principales se encuentran:
+
+\begin{itemize}
+    \item \textbf{Clasificación:} determina qué objeto aparece en una imagen.
+    \item \textbf{Detección de objetos:} localiza objetos mediante cajas delimitadoras.
+    \item \textbf{Segmentación:} asigna una etiqueta a cada píxel de la imagen.
+    \item \textbf{Reconocimiento de acciones:} analiza secuencias de video.
+    \item \textbf{Reconstrucción 3D:} genera modelos tridimensionales a partir de imágenes.
+\end{itemize}
+
+\subsubsection{Ejemplo aplicado}
+
+Un vehículo autónomo utiliza visión por computadora para detectar peatones, señales de tránsito, carriles, semáforos y otros vehículos. También se utiliza en medicina para detectar tumores, segmentar órganos o identificar anomalías en radiografías y resonancias.
+
+Su ventaja es que automatiza tareas visuales complejas y permite a los sistemas interactuar con el mundo físico. Su limitación es que puede ser sensible a iluminación, ruido, perspectiva, oclusiones y datos de entrenamiento insuficientes o sesgados.
+
+\subsection{Procesamiento del Lenguaje Natural}
+
+El Procesamiento del Lenguaje Natural (PLN) es el área de la IA que permite a una máquina comprender, interpretar, generar y producir lenguaje humano, ya sea en texto o voz. Es un campo complejo porque el lenguaje incluye gramática, significado, contexto, intención, ambigüedad y variación cultural.
+
+\subsubsection{Ejemplo aplicado}
+
+Un asistente virtual recibe una pregunta, identifica la intención del usuario, recupera información relevante y genera una respuesta en lenguaje natural. Otros ejemplos son traductores automáticos, sistemas de resumen, análisis de sentimientos, chatbots, reconocimiento de voz y síntesis de voz.
+
+\subsubsection{Análisis}
+
+El PLN facilita la comunicación humano--computadora y permite analizar grandes volúmenes de texto. Se aplica en educación, atención al cliente, accesibilidad, investigación y búsqueda documental.
+
+Sus limitaciones incluyen la dificultad para interpretar ironía, ambigüedad o contexto incompleto. Además, los modelos generativos pueden producir información incorrecta con apariencia convincente, por lo que requieren supervisión y evaluación crítica.
+
+\subsection{Robótica, autonomía y sistemas integrados}
+
+La robótica integra varios modelos de IA: percepción, planificación, control, aprendizaje y toma de decisiones. Un robot inteligente no solo procesa datos; también actúa físicamente en un entorno donde existen obstáculos, incertidumbre, errores de sensores y restricciones de seguridad.
+
+Un robot de servicio en un hospital, por ejemplo, debe reconocer pasillos, evitar personas, ubicar habitaciones, transportar objetos y modificar su ruta si encuentra obstáculos. Para lograrlo puede combinar visión por computadora, búsqueda de rutas, sensores, aprendizaje automático y reglas de seguridad.
+
+La principal ventaja de los sistemas robóticos es que conectan la IA con el mundo físico. Su principal limitación es que los errores pueden tener consecuencias materiales o humanas, por lo que requieren pruebas rigurosas, redundancia y control seguro.
+
+\subsection{Comparación general de modelos}
+
+La siguiente tabla resume los modelos analizados. Se conserva como síntesis final para comparar sus características sin saturar el desarrollo con demasiadas tablas.
+
+\begin{table}[h!]
+\centering
+\small
+\renewcommand{\arraystretch}{1.25}
+\begin{tabularx}{\textwidth}{L{3.1cm} Y Y}
+\toprule
+\textbf{Modelo} & \textbf{Aplicación representativa} & \textbf{Limitación principal} \\
+\midrule
+Agente de reflejo simple & Termostatos, alarmas y sensores básicos. & No planea ni aprende. \\
+Agente basado en metas & GPS, robots de almacén y planificación de rutas. & Puede enfrentar espacios de búsqueda enormes. \\
+Sistema experto & Diagnóstico, soporte técnico y evaluación de riesgos. & Es rígido ante cambios o excepciones. \\
+Modelo probabilístico & Filtros de spam, diagnóstico y predicción de riesgos. & Depende de probabilidades confiables. \\
+Aprendizaje automático & Clasificación, predicción y segmentación de datos. & Requiere datos representativos. \\
+Red neuronal & Visión, voz, texto y reconocimiento de patrones. & Alto costo computacional y baja interpretabilidad. \\
+Aprendizaje por refuerzo & Videojuegos, robótica y control autónomo. & Requiere muchas interacciones. \\
+Visión por computadora & Vehículos autónomos, medicina e inspección industrial. & Sensible a ruido, iluminación y sesgos. \\
+PLN & Chatbots, traducción, resumen y asistentes virtuales. & Puede fallar ante ambigüedad o contexto incompleto. \\
+\bottomrule
+\end{tabularx}
+\caption{Síntesis comparativa de modelos de Inteligencia Artificial.}
+\label{tab:comparacion}
+\end{table}
+
+Esta comparación muestra que no existe un modelo universalmente superior. La elección depende del problema, los datos disponibles, la necesidad de explicación, el costo computacional y el nivel de incertidumbre del ambiente.
+
+% =========================================================
+% CONCLUSIÓN
+% =========================================================
+\section{Conclusión}
+
+Los modelos de Inteligencia Artificial analizados muestran distintas formas de resolver problemas relacionados con percepción, aprendizaje, razonamiento, clasificación, predicción, planificación y toma de decisiones. Los agentes inteligentes permiten comprender la IA como un proceso de interacción entre un sistema y su ambiente. Los agentes de reflejo simple son útiles para tareas rápidas y controladas, mientras que los agentes basados en metas y utilidad permiten resolver problemas más complejos mediante planificación y comparación de alternativas.
+
+La representación de problemas y los algoritmos de búsqueda muestran que muchas situaciones pueden formularse como espacios de estados. Los sistemas expertos destacan por su capacidad de explicación, aunque son rígidos si el conocimiento cambia. Los modelos probabilísticos permiten actuar en condiciones de incertidumbre. El aprendizaje automático y las redes neuronales hacen posible descubrir patrones en grandes volúmenes de datos. El aprendizaje por refuerzo permite optimizar decisiones secuenciales. Finalmente, la visión por computadora, el procesamiento del lenguaje natural y la robótica muestran cómo la IA se aplica en sistemas reales que perciben, interpretan, comunican y actúan.
+
+Una de las principales dificultades encontradas al estudiar estos modelos es comprender que cada técnica tiene condiciones específicas de uso. Algunos modelos requieren muchos datos; otros necesitan reglas bien definidas; otros dependen de buenas heurísticas; y otros sacrifican interpretabilidad a cambio de mayor desempeño. Por ello, seleccionar un modelo de IA no consiste únicamente en elegir el algoritmo más avanzado, sino en analizar el problema, el ambiente, los recursos disponibles, los riesgos y los criterios de evaluación.
+
+Como aprendizaje principal, se concluye que la Inteligencia Artificial es un campo integrador. Un sistema inteligente de calidad combina percepción, representación, razonamiento, aprendizaje y acción. Además, su desarrollo debe considerar no solo la precisión técnica, sino también la seguridad, la transparencia, la ética y el impacto social. En este sentido, estudiar los modelos de IA permite no solo construir sistemas más capaces, sino también evaluar críticamente sus alcances y limitaciones en problemas reales.
+
